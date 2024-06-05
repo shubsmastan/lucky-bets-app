@@ -5,7 +5,7 @@ import { RecordType, setMarkets } from '@/store/dataSlice';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { EventCard } from './EventCard';
+import { MarketCard } from './MarketsCard';
 
 type Props = {
 	eventId?: string;
@@ -55,7 +55,7 @@ export const MarketsList = ({ eventId, type }: Props) => {
 	}
 
 	const marketsList = markets.map((market: RecordType) => (
-		<EventCard type={type || 'asdf'} key={market.id} event={market} />
+		<MarketCard key={market.id} type={type} market={market} />
 	));
 
 	return (

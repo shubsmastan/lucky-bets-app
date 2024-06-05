@@ -20,7 +20,7 @@ export const App = ({ type, eventId, eventType }: Props) => {
 	return (
 		<>
 			<Header />
-			<main className='flex pt-12 relative h-full bg-zinc-50 dark:bg-zinc-950'>
+			<main className='flex pt-12 relative min-h-full bg-zinc-50 dark:bg-zinc-950'>
 				{isSidebarOpen && <Sidebar />}
 				<Dashboard
 					type={type}
