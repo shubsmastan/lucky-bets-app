@@ -8,6 +8,7 @@ import { RootState } from '@/app/store';
 import { toggle } from '@/app/store/preferenceSlice';
 
 import { Bebas_Neue } from 'next/font/google';
+import Link from 'next/link';
 
 const bebasNeue = Bebas_Neue({ subsets: ['latin'], weight: '400' });
 
@@ -30,11 +31,16 @@ export const Header = () => {
 						dispatch(toggle());
 					}}
 				/>
-				<h1 className={`${bebasNeue.className} text-2xl`}>
-					Lucky Bets
+				<h1 className={`${bebasNeue.className} text-2xl select-none`}>
+					<Link href='/'>Lucky Bets</Link>
 				</h1>
 			</div>
-			<FontAwesomeIcon icon={faGear} size='lg' onClick={() => {}} />
+			<FontAwesomeIcon
+				icon={faGear}
+				size='lg'
+				className='cursor-pointer'
+				onClick={() => {}}
+			/>
 		</header>
 	);
 };
