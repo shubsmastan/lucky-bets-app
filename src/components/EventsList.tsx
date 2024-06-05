@@ -14,15 +14,11 @@ type Props = {
 
 export const EventList = ({ type, name }: Props) => {
 	const events = useSelector((state: RootState) => state.data.events);
-	const isSidebarOpen = useSelector(
-		(state: RootState) => state.preference.isSidebarOpen
-	);
 
 	const dispatch = useDispatch();
 
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
-	console.log('FFS');
 
 	useEffect(() => {
 		(async () => {
@@ -51,13 +47,13 @@ export const EventList = ({ type, name }: Props) => {
 	}
 
 	const eventsList = events.map((event: Event) => (
-		<EventCard key={event.id} event={event} />
+		<EventCard type={type} key={event.id} event={event} />
 	));
 
 	return (
 		<>
 			<h1 className='uppercase font-bold text-3xl pb-5'>{name}</h1>
-			<ul className='flex flex-col gap-3'>{eventsList}</ul>
+			<ul className='flex flex-col gap-4'>{eventsList}</ul>
 		</>
 	);
 };

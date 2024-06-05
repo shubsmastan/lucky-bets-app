@@ -8,10 +8,10 @@ import { Dashboard } from '@/components/Dashboard';
 
 type Props = {
 	type: string;
-	name?: string;
+	eventId?: string;
 };
 
-export const App = ({ type }: Props) => {
+export const App = ({ type, eventId }: Props) => {
 	const isSidebarOpen = useSelector(
 		(state: RootState) => state.preference.isSidebarOpen
 	);
@@ -21,7 +21,7 @@ export const App = ({ type }: Props) => {
 			<Header />
 			<main className='flex pt-12 relative h-full bg-zinc-50 dark:bg-zinc-950'>
 				{isSidebarOpen && <Sidebar />}
-				<Dashboard type={type} />
+				<Dashboard type={type} eventId={eventId} />
 			</main>
 		</>
 	);

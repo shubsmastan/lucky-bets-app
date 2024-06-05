@@ -3,13 +3,15 @@ import { useSelector } from 'react-redux';
 
 import { RootState } from '@/store';
 import { categories } from '@/data';
-import { EventList } from './EventsList';
+import { EventList } from '@/components/EventsList';
+import { MarketsList } from '@/components/MarketsList';
 
 type Props = {
 	type: string;
+	eventId?: string;
 };
 
-export const Dashboard = ({ type }: Props) => {
+export const Dashboard = ({ type, eventId }: Props) => {
 	const isSidebarOpen = useSelector(
 		(state: RootState) => state.preference.isSidebarOpen
 	);
@@ -53,6 +55,10 @@ export const Dashboard = ({ type }: Props) => {
 						}
 					/>
 				);
+			}
+
+			case 'market': {
+				return <MarketsList eventId={eventId} />;
 			}
 
 			default: {
