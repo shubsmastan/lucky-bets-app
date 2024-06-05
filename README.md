@@ -1,5 +1,7 @@
 # Lucky Bets App
 
+[Live preview](https://lucky-bets-app.vercel.app).
+
 ## Getting Started
 
 First, run the development server:
