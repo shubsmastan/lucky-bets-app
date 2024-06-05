@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { EventCard } from './EventCard';
+import { Loading } from './Loading';
 
 type Props = {
 	type: string;
@@ -39,11 +40,21 @@ export const EventList = ({ type, name }: Props) => {
 	}, [type, dispatch]);
 
 	if (loading) {
-		return <div>Loading</div>;
+		return (
+			<>
+				<h1 className='uppercase font-bold text-3xl pb-5'>{name}</h1>
+				<Loading />
+			</>
+		);
 	}
 
 	if (error) {
-		return <div>{error}</div>;
+		return (
+			<>
+				<h1 className='uppercase font-bold text-3xl pb-5'>{name}</h1>
+				<p>{error}</p>
+			</>
+		);
 	}
 
 	const eventsList = events.map((event: RecordType) => (

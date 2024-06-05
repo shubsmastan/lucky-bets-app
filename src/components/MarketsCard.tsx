@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { RecordType } from '@/store/dataSlice';
+import { Loading } from './Loading';
 
 type Props = {
 	market: RecordType;
@@ -33,7 +34,7 @@ export const MarketCard = ({ market, type }: Props) => {
 	if (loading) {
 		return (
 			<div className='list-none p-5 bg-zinc-200 dark:bg-zinc-900 rounded-sm'>
-				Loading
+				<Loading />
 			</div>
 		);
 	}

@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MarketCard } from './MarketsCard';
+import { Loading } from './Loading';
 
 type Props = {
 	eventId?: string;
@@ -31,10 +32,10 @@ export const MarketsList = ({ eventId, type }: Props) => {
 				const { data: eventData } = await axios.get(
 					`${process.env.NEXT_PUBLIC_URL}/api/${type}/`
 				);
-				const ev = eventData.events.find(
+				const evt = eventData.events.find(
 					(event: RecordType) => event.id === eventId
 				);
-				setEvent(ev);
+				setEvent(evt);
 				console.log(data);
 				dispatch(setMarkets(data.markets));
 			} catch (err) {
@@ -47,11 +48,23 @@ export const MarketsList = ({ eventId, type }: Props) => {
 	}, [eventId, dispatch, type]);
 
 	if (loading) {
-		return <div>Loading</div>;
+		return (
+			<>
+				<h1 className='uppercase font-bold text-3xl pb-5'>Loading</h1>
+				<Loading />
+			</>
+		);
 	}
 
 	if (error) {
-		return <div>{error}</div>;
+		return (
+			<>
+				<h1 className='uppercase font-bold text-3xl pb-5'>
+					An error occured
+				</h1>
+				<p>{error}</p>
+			</>
+		);
 	}
 
 	const marketsList = markets.map((market: RecordType) => (
