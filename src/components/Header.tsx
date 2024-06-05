@@ -36,12 +36,12 @@ export const Header = () => {
 					<Link href='/'>Lucky Bets</Link>
 				</h1>
 			</div>
-			<FontAwesomeIcon
+			{/* <FontAwesomeIcon
 				icon={faGear}
 				size='lg'
 				className='cursor-pointer'
 				onClick={() => {}}
-			/>
+			/> */}
 		</header>
 	);
 };

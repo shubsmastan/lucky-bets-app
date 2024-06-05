@@ -4,9 +4,14 @@ import { RootState } from '@/store';
 
 import { Header } from '@/components/Header';
 import { Sidebar } from '@/components/Sidebar';
-import { Dashboard } from './Dashboard';
+import { Dashboard } from '@/components/Dashboard';
 
-export const App = () => {
+type Props = {
+	type: string;
+	name?: string;
+};
+
+export const App = ({ type }: Props) => {
 	const isSidebarOpen = useSelector(
 		(state: RootState) => state.preference.isSidebarOpen
 	);
@@ -16,7 +21,7 @@ export const App = () => {
 			<Header />
 			<main className='flex pt-12 relative h-full bg-zinc-50 dark:bg-zinc-950'>
 				{isSidebarOpen && <Sidebar />}
-				<Dashboard />
+				<Dashboard type={type} />
 			</main>
 		</>
 	);
