@@ -1,11 +1,17 @@
+import { Event } from '@/store/dataSlice';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
 
 type Props = {
-	event: any;
+	event: Event;
 };
 
-export const BettingCard = ({ event }: Props) => {
+export const EventCard = ({ event }: Props) => {
+	const [eventData, setEventData] = useState<any>();
+	const [error, setError] = useState('');
+	const [loading, setLoading] = useState(false);
+
 	return (
 		<>
 			<li className='list-none px-3 py-5 bg-zinc-200 dark:bg-zinc-900'>

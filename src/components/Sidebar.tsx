@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { RootState } from '@/app/store';
+import { RootState } from '@/store';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faHeartEmpty } from '@fortawesome/free-regular-svg-icons';
 

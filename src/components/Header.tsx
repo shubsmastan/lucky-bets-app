@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faGear } from '@fortawesome/free-solid-svg-icons';
 
-import { RootState } from '@/app/store';
-import { toggle } from '@/app/store/preferenceSlice';
+import { RootState } from '@/store';
+import { toggle } from '@/store/preferenceSlice';
 
 import { Bebas_Neue } from 'next/font/google';
 import Link from 'next/link';

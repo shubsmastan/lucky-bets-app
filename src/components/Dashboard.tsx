@@ -1,13 +1,11 @@
-'use client';
-
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import axios from 'axios';
 
-import { RootState } from '@/app/store';
-import { setEvents } from '@/app/store/dataSlice';
-import { BettingCard } from './BettingCard';
+import { RootState } from '@/store';
+import { Event, setEvents } from '@/store/dataSlice';
+import { EventCard } from './EventCard';
 
 export const Dashboard = () => {
 	const events = useSelector((state: RootState) => state.data.events);
@@ -23,7 +21,7 @@ export const Dashboard = () => {
 			try {
 				setLoading(true);
 				const { data } = await axios.get(
-					'https://cors-anywhere.herokuapp.com/https://api.smarkets.com/v3/events?type=rugby_league_match'
+					`${process.env.NEXT_PUBLIC_URL}/api`
 				);
 				dispatch(setEvents(data.events));
 			} catch (err) {
@@ -37,7 +35,8 @@ export const Dashboard = () => {
 
 	if (loading) {
 		return (
-			<section className='p-5'>
+			<section
+				className={`p-5 ${isSidebarOpen && 'pl-[16.5rem]'} w-full`}>
 				<p>Loading...</p>
 			</section>
 		);
@@ -45,20 +44,21 @@ export const Dashboard = () => {
 
 	if (error) {
 		return (
-			<section className='p-5'>
+			<section
+				className={`p-5 ${isSidebarOpen && 'pl-[16.5rem]'} w-full`}>
 				<p>{error}</p>
 			</section>
 		);
 	}
 
 	const eventList = events.map(event => (
-		<BettingCard key={event.id as string} event={event} />
+		<EventCard key={event.id} event={event} />
 	));
 
 	return (
-		<section className={`p-5 ${isSidebarOpen && 'pl-[16.5rem]'} w-full`}>
-			<p>Welcome!</p>
-			<div className='p-10 flex flex-col gap-3'>{eventList}</div>
+		<section className={`py-5 ${isSidebarOpen && 'pl-[19rem]'} w-full`}>
+			<h1 className='uppercase font-bold text-3xl pb-5'>Rugby</h1>
+			<div className='flex flex-col gap-3'>{eventList}</div>
 		</section>
 	);
 };

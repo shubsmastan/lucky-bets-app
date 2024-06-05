@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { RootState } from '@/app/store';
+import { RootState } from '@/store';
 
 import { Header } from '@/components/Header';
 import { Sidebar } from '@/components/Sidebar';

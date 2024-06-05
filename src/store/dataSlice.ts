@@ -1,9 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-export interface PreferenceSlice {
-	events: Record<string, string | number | boolean | null>[];
-}
+export type Event = Record<string, string | number | boolean | null> & {
+	id: string;
+};
+
+export type PreferenceSlice = {
+	events: Event[];
+};
 
 const initialState: PreferenceSlice = {
 	events: [],
