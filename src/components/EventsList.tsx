@@ -1,7 +1,7 @@
 'use client';
 
 import { RootState } from '@/store';
-import { Event, setEvents } from '@/store/dataSlice';
+import { RecordType, setEvents } from '@/store/dataSlice';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -46,7 +46,7 @@ export const EventList = ({ type, name }: Props) => {
 		return <div>{error}</div>;
 	}
 
-	const eventsList = events.map((event: Event) => (
+	const eventsList = events.map((event: RecordType) => (
 		<EventCard type={type} key={event.id} event={event} />
 	));
 

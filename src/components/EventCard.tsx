@@ -3,10 +3,10 @@ import Link from 'next/link';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Event } from '@/store/dataSlice';
+import { RecordType } from '@/store/dataSlice';
 
 type Props = {
-	event: Event;
+	event: RecordType;
 	type: string;
 };
 

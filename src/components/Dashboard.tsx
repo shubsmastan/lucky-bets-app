@@ -9,9 +9,10 @@ import { MarketsList } from '@/components/MarketsList';
 type Props = {
 	type: string;
 	eventId?: string;
+	eventType?: string;
 };
 
-export const Dashboard = ({ type, eventId }: Props) => {
+export const Dashboard = ({ type, eventId, eventType }: Props) => {
 	const isSidebarOpen = useSelector(
 		(state: RootState) => state.preference.isSidebarOpen
 	);
@@ -49,16 +50,15 @@ export const Dashboard = ({ type, eventId }: Props) => {
 					<EventList
 						type={type}
 						name={
-							categories.filter(
-								category => category.id === type
-							)[0].name
+							categories.find(category => category.id === type)!
+								.name
 						}
 					/>
 				);
 			}
 
-			case 'market': {
-				return <MarketsList eventId={eventId} />;
+			case 'markets': {
+				return <MarketsList type={eventType} eventId={eventId} />;
 			}
 
 			default: {

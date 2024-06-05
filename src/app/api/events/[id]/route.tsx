@@ -3,10 +3,10 @@ import { NextRequest } from 'next/server';
 
 export async function GET(
 	_: NextRequest,
-	{ params }: { params: { type: string } }
+	{ params }: { params: { id: string } }
 ) {
 	const { data } = await axios.get(
-		`https://api.smarkets.com/v3/events?type=${params.type}&limit=8`
+		`https://api.smarkets.com/v3/events/${params.id}/markets/`
 	);
 
 	return Response.json(data);

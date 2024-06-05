@@ -7,13 +7,13 @@ import { store } from '@/store';
 import { App } from '@/components/App';
 
 type Props = {
-	params: { id: string };
+	params: { type: string; id: string };
 };
 
 export default function Home({ params }: Props) {
 	return (
 		<Provider store={store}>
-			<App type='markets' eventId={params.id} />
+			<App type='markets' eventType={params.type} eventId={params.id} />
 		</Provider>
 	);
 }

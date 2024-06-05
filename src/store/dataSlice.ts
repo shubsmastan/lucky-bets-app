@@ -1,28 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-export type Event = Record<string, string | number | boolean | null> & {
+export type RecordType = Record<string, string | number | boolean | null> & {
 	id: string;
 };
 
 export type PreferenceSlice = {
-	events: Event[];
+	events: RecordType[];
+	markets: RecordType[];
 };
 
 const initialState: PreferenceSlice = {
 	events: [],
+	markets: [],
 };
 
 export const preferenceSlice = createSlice({
-	name: 'events',
+	name: 'data',
 	initialState,
 	reducers: {
 		setEvents: (state, action: PayloadAction<any>) => {
 			state.events = action.payload;
 		},
+		setMarkets: (state, action: PayloadAction<any>) => {
+			state.markets = action.payload;
+		},
 	},
 });
 
-export const { setEvents } = preferenceSlice.actions;
+export const { setEvents, setMarkets } = preferenceSlice.actions;
 
 export default preferenceSlice.reducer;
