@@ -1,10 +1,15 @@
-import { Header } from '@/components/Header';
+'use client';
+
+import { Provider } from 'react-redux';
+
+import { store } from '@/app/store';
+
+import { App } from '@/components/App';
 
 export default function Home() {
 	return (
-		<>
-			<Header />
-			<p>Hello, World!</p>
-		</>
+		<Provider store={store}>
+			<App />
+		</Provider>
 	);
 }
