@@ -14,7 +14,7 @@ export const App = () => {
 	return (
 		<>
 			<Header />
-			<main className='flex h-[calc(100%-3rem)] pt-12 relative'>
+			<main className='flex pt-12 relative h-full bg-zinc-50 dark:bg-zinc-950'>
 				{isSidebarOpen && <Sidebar />}
 				<Dashboard />
 			</main>

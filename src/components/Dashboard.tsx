@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 
 import { RootState } from '@/store';
 import { categories } from '@/data';
+import Link from 'next/link';
 
 export const Dashboard = () => {
 	const isSidebarOpen = useSelector(
@@ -9,10 +10,12 @@ export const Dashboard = () => {
 	);
 
 	const categoryCards = categories.map(category => (
-		<li
-			key={category.id}
-			className='list-none px-3 py-5 bg-zinc-200 dark:bg-zinc-900 rounded-sm'>
-			<h2 className='font-bold'>{category.name}</h2>
+		<li key={category.id} className='list-none'>
+			<Link
+				href={`${category.id}`}
+				className='flex gap-5 px-3 py-5 bg-zinc-200 dark:bg-zinc-900 rounded-sm hover:bg-zinc-300 hover:dark:bg-zinc-800'>
+				<h2 className='font-bold text-lg'>{category.name}</h2>
+			</Link>
 		</li>
 	));
 

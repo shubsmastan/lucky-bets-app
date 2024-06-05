@@ -31,7 +31,8 @@ export const Header = () => {
 						dispatch(toggle());
 					}}
 				/>
-				<h1 className={`${bebasNeue.className} text-2xl select-none`}>
+				<h1
+					className={`${bebasNeue.className} text-2xl select-none text-white`}>
 					<Link href='/'>Lucky Bets</Link>
 				</h1>
 			</div>
