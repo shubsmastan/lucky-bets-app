@@ -19,7 +19,7 @@ export const Header = () => {
 	const dispatch = useDispatch();
 
 	return (
-		<header className='flex justify-between items-center px-5 py-2 h-12 bg-zinc-300 dark:bg-zinc-900'>
+		<header className='flex justify-between items-center w-full px-5 py-2 h-12 fixed top-0 z-10 bg-zinc-300 dark:bg-zinc-900'>
 			<div className='flex items-center gap-5'>
 				<FontAwesomeIcon
 					icon={faBars}

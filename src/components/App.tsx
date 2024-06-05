@@ -14,7 +14,7 @@ export const App = () => {
 	return (
 		<>
 			<Header />
-			<main className='flex h-[calc(100%-3rem)]'>
+			<main className='flex h-[calc(100%-3rem)] pt-12 relative'>
 				{isSidebarOpen && <Sidebar />}
 				<Dashboard />
 			</main>

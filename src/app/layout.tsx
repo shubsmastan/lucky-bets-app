@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body className={`${sourceSans3.className} h-screen`}>
+			<body className={`${sourceSans3.className} h-screen relative`}>
 				{children}
 			</body>
 		</html>
