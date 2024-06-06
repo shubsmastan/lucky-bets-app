@@ -70,7 +70,9 @@ export const Dashboard = ({ type, eventId, eventType }: Props) => {
 	const dashboardContent = useDashboardContent();
 	return (
 		<section
-			className={`py-5 px-10 ${isSidebarOpen && 'pl-[19rem]'} w-full`}>
+			className={`px-3 py-5 w-full lg:px-10 ${
+				isSidebarOpen && 'lg:pl-[19rem]'
+			}`}>
 			{dashboardContent}
 		</section>
 	);
