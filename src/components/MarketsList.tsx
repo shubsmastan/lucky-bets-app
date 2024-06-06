@@ -24,6 +24,14 @@ export const MarketsList = ({ eventId, type }: Props) => {
 			const event = eventData.events.find(
 				(event: RecordType) => event.id === eventId
 			);
+			for (let i = 0; i < markets.length; i++) {
+				const { data: contractData } = await axios.get(
+					`${process.env.NEXT_PUBLIC_URL}/api/markets/${markets[i].id}/`
+				);
+				const contracts: RecordType[] = contractData.contracts;
+				markets[i].contracts = contracts;
+			}
+
 			return { markets, event };
 		},
 	});
@@ -51,9 +59,17 @@ export const MarketsList = ({ eventId, type }: Props) => {
 		);
 	}
 
-	const marketsList = markets.map((market: RecordType) => (
-		<MarketCard key={market.id} market={market} />
+	const marketsList = markets.map((market: any) => (
+		<MarketCard
+			key={market.id}
+			market={market}
+			contracts={market.contracts}
+		/>
 	));
+
+	// markets.forEach((market: any) => {
+	// 	console.log(market.contracts);
+	// });
 
 	return (
 		<>

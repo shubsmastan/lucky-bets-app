@@ -1,45 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-
-import { Loading } from '@/components/Loading';
 import { RecordType } from '@/types';
 
 type Props = {
 	market: RecordType;
+	contracts: RecordType[];
 };
 
-export const MarketCard = ({ market }: Props) => {
-	const {
-		data: contracts,
-		isLoading,
-		isError,
-	} = useQuery({
-		queryKey: ['contracts', market.id],
-		queryFn: async () => {
-			const { data } = await axios.get(
-				`${process.env.NEXT_PUBLIC_URL}/api/markets/${market.id}/`
-			);
-			const contracts = data.contracts;
-			return contracts;
-		},
-	});
-
-	if (isLoading) {
-		return (
-			<div className='list-none p-5 bg-zinc-200 dark:bg-zinc-900 rounded-sm'>
-				<Loading />
-			</div>
-		);
-	}
-
-	if (isError) {
-		return (
-			<div className='list-none p-5 bg-zinc-200 dark:bg-zinc-900 rounded-sm'>
-				Could not get contracts data from Smarkets API.
-			</div>
-		);
-	}
-
+export const MarketCard = ({ market, contracts }: Props) => {
 	const contractList = contracts?.map((contract: RecordType) => (
 		<div
 			key={contract.id}
