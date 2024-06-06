@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { useStore } from '@tanstack/react-store';
 import { useWindowSize } from '@uidotdev/usehooks';
 
@@ -15,6 +16,8 @@ type Props = {
 	eventType?: string;
 };
 
+export const queryClient = new QueryClient();
+
 export const App = ({ type, eventId, eventType }: Props) => {
 	const isSidebarOpen = useStore(store, state => state.isSidebarOpen);
 
@@ -26,7 +29,7 @@ export const App = ({ type, eventId, eventType }: Props) => {
 	}, [width]);
 
 	return (
-		<>
+		<QueryClientProvider client={queryClient}>
 			<Header />
 			<main className='flex pt-12 relative min-h-full bg-zinc-50 dark:bg-zinc-950'>
 				{isSidebarOpen && <Sidebar />}
@@ -36,6 +39,6 @@ export const App = ({ type, eventId, eventType }: Props) => {
 					eventType={eventType}
 				/>
 			</main>
-		</>
+		</QueryClientProvider>
 	);
 };
