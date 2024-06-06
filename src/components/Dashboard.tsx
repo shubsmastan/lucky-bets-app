@@ -45,7 +45,10 @@ export const Dashboard = ({ type, eventId, eventType }: Props) => {
 			case 'cycling':
 			case 'cricket_match':
 			case 'darts_match':
-			case 'rugby_union_match': {
+			case 'league_of_legends_match':
+			case 'politics':
+			case 'rugby_union_match':
+			case 'tv_entertainment': {
 				return (
 					<EventList
 						type={type}
