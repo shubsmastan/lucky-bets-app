@@ -71,7 +71,7 @@ export const Dashboard = ({ type, eventId, eventType }: Props) => {
 	return (
 		<section
 			className={`px-3 py-5 w-full lg:px-10 ${
-				isSidebarOpen && 'lg:pl-[19rem]'
+				isSidebarOpen && 'lg:pl-[17rem]'
 			}`}>
 			{dashboardContent}
 		</section>

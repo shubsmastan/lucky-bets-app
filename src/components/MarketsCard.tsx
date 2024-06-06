@@ -50,12 +50,12 @@ export const MarketCard = ({ market, type }: Props) => {
 	const contractList = contracts?.map((contract: RecordType) => (
 		<div
 			key={contract.id}
-			className='flex gap-10 justify-evenly items-center py-5 border-solid border-b-zinc-400 dark:border-b-zinc-600 border-b-[1px]'>
-			<h3 className='flex-1 ml-3'>{contract.name}</h3>
+			className='flex gap-10 justify-evenly items-center py-5 border-solid border-b-zinc-400 dark:border-b-zinc-600 border-b-[1px] lg:pl-5 lg:pr-10'>
+			<h3 className='flex-1'>{contract.name}</h3>
 			<div className='bg-emerald-500 rounded-md w-20 text-center px-3 py-1 font-bold'>
 				{Math.floor(Math.random() * 10000) / 100}%
 			</div>
-			<div className='bg-sky-500 rounded-md w-20 text-center px-3 py-1 font-bold mr-10'>
+			<div className='bg-sky-500 rounded-md w-20 text-center px-3 py-1 font-bold'>
 				{Math.floor((Math.random() * 10000) / 100)}%
 			</div>
 		</div>
