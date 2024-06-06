@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faGear } from '@fortawesome/free-solid-svg-icons';
 
 import { RootState } from '@/store';
-import { toggle } from '@/store/preferenceSlice';
+import { setIsSidebarOpen } from '@/store/preferenceSlice';
 
 import { Bebas_Neue } from 'next/font/google';
 import Link from 'next/link';
@@ -28,7 +28,7 @@ export const Header = () => {
 						isSidebarOpen && 'text-emerald-500'
 					} cursor-pointer`}
 					onClick={() => {
-						dispatch(toggle());
+						dispatch(setIsSidebarOpen(!isSidebarOpen));
 					}}
 				/>
 				<h1

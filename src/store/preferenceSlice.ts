@@ -13,12 +13,12 @@ export const preferenceSlice = createSlice({
 	name: 'preference',
 	initialState,
 	reducers: {
-		toggle: state => {
-			state.isSidebarOpen = !state.isSidebarOpen;
+		setIsSidebarOpen: (state, action: PayloadAction<boolean>) => {
+			state.isSidebarOpen = action.payload;
 		},
 	},
 });
 
-export const { toggle } = preferenceSlice.actions;
+export const { setIsSidebarOpen } = preferenceSlice.actions;
 
 export default preferenceSlice.reducer;
