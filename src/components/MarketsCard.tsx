@@ -56,7 +56,7 @@ export const MarketCard = ({ market, type }: Props) => {
 				{Math.floor(Math.random() * 10000) / 100}%
 			</div>
 			<div className='bg-sky-500 rounded-md w-20 text-center px-3 py-1 font-bold'>
-				{Math.floor((Math.random() * 10000) / 100)}%
+				{Math.floor(Math.random() * 10000) / 100}%
 			</div>
 		</div>
 	));
