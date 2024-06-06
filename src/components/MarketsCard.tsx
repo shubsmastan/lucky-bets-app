@@ -14,7 +14,7 @@ export const MarketCard = ({ market }: Props) => {
 		isLoading,
 		isError,
 	} = useQuery({
-		queryKey: ['contracts'],
+		queryKey: ['contracts', market.id],
 		queryFn: async () => {
 			const { data } = await axios.get(
 				`${process.env.NEXT_PUBLIC_URL}/api/markets/${market.id}/`

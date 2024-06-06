@@ -12,7 +12,7 @@ type Props = {
 
 export const MarketsList = ({ eventId, type }: Props) => {
 	const { data, isLoading, isError } = useQuery({
-		queryKey: ['markets'],
+		queryKey: ['markets', eventId],
 		queryFn: async () => {
 			const { data } = await axios.get(
 				`${process.env.NEXT_PUBLIC_URL}/api/events/${eventId}/`

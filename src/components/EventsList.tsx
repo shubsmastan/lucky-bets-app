@@ -16,7 +16,7 @@ export const EventList = ({ type, name }: Props) => {
 		isLoading,
 		isError,
 	} = useQuery({
-		queryKey: ['events'],
+		queryKey: ['events', type],
 		queryFn: async () => {
 			const { data } = await axios.get(
 				`${process.env.NEXT_PUBLIC_URL}/api/${type}/`
