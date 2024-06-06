@@ -1,13 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
-import preferenceReducer from './preferenceSlice';
-import dataReducer from './dataSlice';
+import { Store } from '@tanstack/store';
 
-export const store = configureStore({
-	reducer: {
-		preference: preferenceReducer,
-		data: dataReducer,
-	},
+export const store = new Store({
+	isSidebarOpen: false,
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export const setIsSidebarOpen = (isSidebarOpen: boolean) => {
+	store.setState(state => {
+		return {
+			...state,
+			isSidebarOpen,
+		};
+	});
+};

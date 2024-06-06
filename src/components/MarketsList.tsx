@@ -1,12 +1,11 @@
 'use client';
 
-import { RootState } from '@/store';
-import { RecordType, setMarkets } from '@/store/dataSlice';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { MarketCard } from './MarketsCard';
-import { Loading } from './Loading';
+
+import { MarketCard } from '@/components/MarketsCard';
+import { Loading } from '@/components/Loading';
+import { RecordType } from '@/types';
 
 type Props = {
 	eventId?: string;
@@ -14,40 +13,27 @@ type Props = {
 };
 
 export const MarketsList = ({ eventId, type }: Props) => {
-	const markets = useSelector((state: RootState) => state.data.markets);
+	const { data, isLoading, isError } = useQuery({
+		queryKey: ['markets'],
+		queryFn: async () => {
+			const { data } = await axios.get(
+				`${process.env.NEXT_PUBLIC_URL}/api/events/${eventId}/`
+			);
+			const markets = data.markets;
+			const { data: eventData } = await axios.get(
+				`${process.env.NEXT_PUBLIC_URL}/api/${type}/`
+			);
+			const event = eventData.events.find(
+				(event: RecordType) => event.id === eventId
+			);
+			return { markets, event };
+		},
+	});
 
-	const dispatch = useDispatch();
+	const markets = data?.markets;
+	const event = data?.event;
 
-	const [event, setEvent] = useState<RecordType>();
-	const [error, setError] = useState('');
-	const [loading, setLoading] = useState(false);
-
-	useEffect(() => {
-		(async () => {
-			try {
-				setLoading(true);
-				const { data } = await axios.get(
-					`${process.env.NEXT_PUBLIC_URL}/api/events/${eventId}`
-				);
-				const { data: eventData } = await axios.get(
-					`${process.env.NEXT_PUBLIC_URL}/api/${type}/`
-				);
-				const evt = eventData.events.find(
-					(event: RecordType) => event.id === eventId
-				);
-				setEvent(evt);
-				console.log(data);
-				dispatch(setMarkets(data.markets));
-			} catch (err) {
-				console.log(err);
-				setError('Could not get markets data from Smarkets API.');
-			} finally {
-				setLoading(false);
-			}
-		})();
-	}, [eventId, dispatch, type]);
-
-	if (loading) {
+	if (isLoading) {
 		return (
 			<>
 				<h1 className='uppercase font-bold text-3xl pb-5'>Loading</h1>
@@ -56,13 +42,13 @@ export const MarketsList = ({ eventId, type }: Props) => {
 		);
 	}
 
-	if (error) {
+	if (isError) {
 		return (
 			<>
 				<h1 className='uppercase font-bold text-3xl pb-5'>
 					An error occured
 				</h1>
-				<p>{error}</p>
+				<p>Could not get markets data from Smarkets API.</p>
 			</>
 		);
 	}

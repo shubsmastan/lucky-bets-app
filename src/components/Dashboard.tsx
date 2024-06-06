@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
+import { useStore } from '@tanstack/react-store';
 
-import { RootState } from '@/store';
+import { store } from '@/store';
 import { categories } from '@/data';
 import { EventList } from '@/components/EventsList';
 import { MarketsList } from '@/components/MarketsList';
@@ -13,9 +13,7 @@ type Props = {
 };
 
 export const Dashboard = ({ type, eventId, eventType }: Props) => {
-	const isSidebarOpen = useSelector(
-		(state: RootState) => state.preference.isSidebarOpen
-	);
+	const isSidebarOpen = useStore(store, state => state.isSidebarOpen);
 
 	const useDashboardContent = () => {
 		switch (type) {

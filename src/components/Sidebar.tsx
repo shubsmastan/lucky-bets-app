@@ -1,16 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { useStore } from '@tanstack/react-store';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/store';
+import { store } from '@/store';
 import { categories } from '@/data';
 
 export const Sidebar = () => {
-	const isSidebarOpen = useSelector(
-		(state: RootState) => state.preference.isSidebarOpen
-	);
-
-	const dispatch = useDispatch();
+	const isSidebarOpen = useStore(store, state => state.isSidebarOpen);
 
 	const categoryNavs = categories.map(category => (
 		<li key={category.id} className='list-none w-full'>

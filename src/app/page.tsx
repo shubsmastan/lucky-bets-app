@@ -1,15 +1,15 @@
 'use client';
 
-import { Provider } from 'react-redux';
-
-import { store } from '@/store';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
 import { App } from '@/components/App';
 
+export const queryClient = new QueryClient();
+
 export default function Home() {
 	return (
-		<Provider store={store}>
+		<QueryClientProvider client={queryClient}>
 			<App type='home' />
-		</Provider>
+		</QueryClientProvider>
 	);
 }

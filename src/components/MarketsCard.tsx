@@ -1,7 +1,8 @@
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { RecordType } from '@/store/dataSlice';
-import { Loading } from './Loading';
+
+import { Loading } from '@/components/Loading';
+import { RecordType } from '@/types';
 
 type Props = {
 	market: RecordType;
@@ -9,29 +10,22 @@ type Props = {
 };
 
 export const MarketCard = ({ market, type }: Props) => {
-	const [contracts, setContracts] = useState<RecordType[]>();
-	const [error, setError] = useState('');
-	const [loading, setLoading] = useState(false);
+	const {
+		data: contracts,
+		isLoading,
+		isError,
+	} = useQuery({
+		queryKey: ['contracts'],
+		queryFn: async () => {
+			const { data } = await axios.get(
+				`${process.env.NEXT_PUBLIC_URL}/api/markets/${market.id}/`
+			);
+			const contracts = data.contracts;
+			return contracts;
+		},
+	});
 
-	useEffect(() => {
-		(async () => {
-			try {
-				setLoading(true);
-				const { data } = await axios.get(
-					`${process.env.NEXT_PUBLIC_URL}/api/markets/${market.id}`
-				);
-				setContracts(data.contracts);
-				console.log(data);
-			} catch (err) {
-				console.log(err);
-				setError('Could not get contracts data from Smarkets API.');
-			} finally {
-				setLoading(false);
-			}
-		})();
-	}, [market.id, type]);
-
-	if (loading) {
+	if (isLoading) {
 		return (
 			<div className='list-none p-5 bg-zinc-200 dark:bg-zinc-900 rounded-sm'>
 				<Loading />
@@ -39,10 +33,10 @@ export const MarketCard = ({ market, type }: Props) => {
 		);
 	}
 
-	if (error) {
+	if (isError) {
 		return (
 			<div className='list-none p-5 bg-zinc-200 dark:bg-zinc-900 rounded-sm'>
-				{error}
+				Could not get contracts data from Smarkets API.
 			</div>
 		);
 	}

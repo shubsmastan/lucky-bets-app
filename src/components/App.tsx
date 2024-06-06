@@ -1,12 +1,13 @@
+'use client';
+
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useStore } from '@tanstack/react-store';
 import { useWindowSize } from '@uidotdev/usehooks';
 
-import { RootState } from '@/store';
+import { store, setIsSidebarOpen } from '@/store';
 import { Header } from '@/components/Header';
 import { Sidebar } from '@/components/Sidebar';
 import { Dashboard } from '@/components/Dashboard';
-import { setIsSidebarOpen } from '@/store/preferenceSlice';
 
 type Props = {
 	type: string;
@@ -15,18 +16,14 @@ type Props = {
 };
 
 export const App = ({ type, eventId, eventType }: Props) => {
-	const isSidebarOpen = useSelector(
-		(state: RootState) => state.preference.isSidebarOpen
-	);
-
-	const dispatch = useDispatch();
+	const isSidebarOpen = useStore(store, state => state.isSidebarOpen);
 
 	const { width } = useWindowSize();
 
 	useEffect(() => {
-		if (width && width > 1024) dispatch(setIsSidebarOpen(true));
-		else dispatch(setIsSidebarOpen(false));
-	}, [width, dispatch]);
+		if (width && width > 1024) setIsSidebarOpen(true);
+		else setIsSidebarOpen(false);
+	}, [width]);
 
 	return (
 		<>

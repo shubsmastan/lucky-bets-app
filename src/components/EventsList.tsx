@@ -1,12 +1,11 @@
 'use client';
 
-import { RootState } from '@/store';
-import { RecordType, setEvents } from '@/store/dataSlice';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { EventCard } from './EventCard';
-import { Loading } from './Loading';
+
+import { EventCard } from '@/components/EventCard';
+import { Loading } from '@/components/Loading';
+import { RecordType } from '@/types';
 
 type Props = {
 	type: string;
@@ -14,32 +13,22 @@ type Props = {
 };
 
 export const EventList = ({ type, name }: Props) => {
-	const events = useSelector((state: RootState) => state.data.events);
+	const {
+		data: events,
+		isLoading,
+		isError,
+	} = useQuery({
+		queryKey: ['events'],
+		queryFn: async () => {
+			const { data } = await axios.get(
+				`${process.env.NEXT_PUBLIC_URL}/api/${type}/`
+			);
+			const events = data.events;
+			return events;
+		},
+	});
 
-	const dispatch = useDispatch();
-
-	const [error, setError] = useState('');
-	const [loading, setLoading] = useState(false);
-
-	useEffect(() => {
-		(async () => {
-			try {
-				setLoading(true);
-				const { data } = await axios.get(
-					`${process.env.NEXT_PUBLIC_URL}/api/${type}/`
-				);
-				console.log(data);
-				dispatch(setEvents(data.events));
-			} catch (err) {
-				console.log(err);
-				setError('Could not get event data from Smarkets API.');
-			} finally {
-				setLoading(false);
-			}
-		})();
-	}, [type, dispatch]);
-
-	if (loading) {
+	if (isLoading) {
 		return (
 			<>
 				<h1 className='uppercase font-bold text-3xl pb-5'>{name}</h1>
@@ -48,11 +37,11 @@ export const EventList = ({ type, name }: Props) => {
 		);
 	}
 
-	if (error) {
+	if (isError || !events) {
 		return (
 			<>
 				<h1 className='uppercase font-bold text-3xl pb-5'>{name}</h1>
-				<p>{error}</p>
+				<p>Could not get event data from Smarkets API.</p>
 			</>
 		);
 	}

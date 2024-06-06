@@ -1,10 +1,8 @@
 'use client';
 
-import { Provider } from 'react-redux';
-
-import { store } from '@/store';
-
+import { QueryClientProvider } from '@tanstack/react-query';
 import { App } from '@/components/App';
+import { queryClient } from '@/app/page';
 
 type Props = {
 	params: { type: string; id: string };
@@ -12,8 +10,8 @@ type Props = {
 
 export default function Home({ params }: Props) {
 	return (
-		<Provider store={store}>
+		<QueryClientProvider client={queryClient}>
 			<App type='markets' eventType={params.type} eventId={params.id} />
-		</Provider>
+		</QueryClientProvider>
 	);
 }
