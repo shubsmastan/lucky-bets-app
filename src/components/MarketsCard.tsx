@@ -6,10 +6,9 @@ import { RecordType } from '@/types';
 
 type Props = {
 	market: RecordType;
-	type?: string;
 };
 
-export const MarketCard = ({ market, type }: Props) => {
+export const MarketCard = ({ market }: Props) => {
 	const {
 		data: contracts,
 		isLoading,

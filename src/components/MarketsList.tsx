@@ -1,5 +1,3 @@
-'use client';
-
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
@@ -54,7 +52,7 @@ export const MarketsList = ({ eventId, type }: Props) => {
 	}
 
 	const marketsList = markets.map((market: RecordType) => (
-		<MarketCard key={market.id} type={type} market={market} />
+		<MarketCard key={market.id} market={market} />
 	));
 
 	return (

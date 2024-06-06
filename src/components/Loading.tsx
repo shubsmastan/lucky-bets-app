@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 export const Loading = () => {
 	return (
 		<div className='w-full text-left'>

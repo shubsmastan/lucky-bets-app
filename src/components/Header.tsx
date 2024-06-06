@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import { useStore } from '@tanstack/react-store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
